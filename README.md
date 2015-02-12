@@ -1,4 +1,4 @@
-<a href="http://bestwebsoft.com/products/re-attacher/" target=_blank>Re attacher Wordpress Plugin</a> 
+<a href="http://bestwebsoft.com/products/re-attacher/" target=_blank>Re-attacher Wordpress Plugin</a> 
 ------------------------------------------
 
 With this plugin, you can reattach previously uploaded images to other posts, as well as detach files from the post completely. Re-attacher allows you to manage both single files and groups of files. This plugin makes using our Gallery and Portfolio plugins a lot more convenient, as you won’t have to upload new images each time you may need them on your gallery or portfolio pages. Instead, you can use the uploaded files, which not only saves your time, but also helps you spare some space for your website. 
