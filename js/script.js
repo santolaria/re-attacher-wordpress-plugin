@@ -77,14 +77,7 @@
 				e.stopPropagation();	
 				$( this ).parent().remove();
 			});
-		}
-		/* display notice in settings page */
-		$( '#rttchr_settings_form input' ).bind( 'change click select', function() {		
-			if ( $( this ).attr( 'type' ) != 'submit' ) {
-				$( '.updated.fade' ).css( 'display', 'none' );
-				$( '#rttchr_settings_notice' ).css( 'display', 'block' );
-			};
-		});		
+		}	
 	});	
 })( jQuery );
 /* Create preview on a gallery page */

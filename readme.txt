@@ -1,10 +1,10 @@
 === Re-attacher by BestWebSoft ===
 Contributors: bestwebsoft 
 Donate link: http://bestwebsoft.com/donate/
-Tags: plugin, wordpress, unattach, reattach, attach, re-attach, unattachment, attached, bind, image, re-attacher, re-attacher plugin, attach image, attachment, reatach, reattacj, re-attech, attach multiple files, attach to gallery, attach to portfolio
-Requires at least: 3.5 
-Tested up to: 4.2.3
-Stable tag: 1.0.3
+Tags: add re-attacher plugin, add attachment plugin, attach, attach image, attach file, attach files, attach multiple files, attach to gallery, attach to portfolio, attached, Attachment, BiND, free plugin, free re-attacher plugin, free attachment plugin, image, plugin, re-attach, re-attacher, re-attacher plugin, re-attech, reatach, reattach, reattacj, unattach, unattachment, wordpress, wp, wp plugin, wp free plugin, wp re-attacher, wp re-attacher plugin, wp simple re-attacher plugin, wp free re-attacher, wp free re-attacher plugin, wordpress plugin, wordpress free plugin, wordpress re-attacher, wordpress re-attacher plugin, wordpress simple re-attacher plugin, wordpress free re-attacher, wordpress free re-attacher plugin
+Requires at least: 3.8
+Tested up to: 4.3.1
+Stable tag: 1.0.4
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -12,22 +12,22 @@ This plugin allows attaching, unattaching or reattaching media data to different
 
 == Description ==
 
-With this plugin, you can reattach previously uploaded images to other posts, as well as detach files from the post completely. Re-attacher allows you to manage both single files and groups of files. This plugin makes using our Gallery and Portfolio plugins a lot more convenient, as you won't have to upload new images each time you may need them on your gallery or portfolio pages. Instead, you can use the uploaded files, which not only saves your time, but also helps you spare some space for your website.
+With this plugin, you can reattach previously uploaded images to other posts, as well as detach files from the post completely. Re-attacher allows you to manage both single files and groups of files. This plugin makes using our Gallery (to version 4.3.6) and Portfolio plugins a lot more convenient, as you won't have to upload new images each time you may need them on your gallery or portfolio pages. Instead, you can use the uploaded files, which not only saves your time, but also helps you spare some space for your website.
 
 http://www.youtube.com/watch?v=-EoT_zQJqHM
 
-<a href="http://www.youtube.com/watch?v=kjMK6GZ69YY" target="_blank">Video instruction on Installation</a>
+<a href="http://www.youtube.com/watch?v=kjMK6GZ69YY" target="_blank">Re-attacher by BestWebSoft Video instruction on Installation</a>
 
-<a href="http://wordpress.org/plugins/re-attacher/faq/" target="_blank">FAQ</a>
+<a href="http://wordpress.org/plugins/re-attacher/faq/" target="_blank">Re-attacher by BestWebSoft FAQ</a>
 
-<a href="http://support.bestwebsoft.com" target="_blank">Support</a>
+<a href="http://support.bestwebsoft.com" target="_blank">Re-attacher by BestWebSoft Support</a>
 
 = Features = 
 
-* Actions: Unattach any media file from the Media Library
-* Actions: Attach any media file from the Media Library to any post
-* Actions: Attach any media file to your gallery or portfolio
-* Display: Information on the files that are already attached
+* Unattach any media file from the Media Library
+* Attach any media file from the Media Library to any post
+* Attach any media file to your gallery or portfolio
+* Information on the files that are already attached
 
 = Recommended Plugins = 
 
@@ -69,7 +69,8 @@ http://www.youtube.com/watch?v=kjMK6GZ69YY
 
 = I installed the plugin, but the attachment button did not appear in the gallery. Why? =
 
-Please make sure Re-attacher plugin is activated updated to the latest version. 
+Please make sure Re-attacher plugin is updated to the latest version. 
+Functionality for galleries downloading and displaying in dashboard was updated in the Gallery Free version 4.3.6 (Pro version 1.5.1), and now there is no need to re-attach the images.
 
 == Can I use this plugin for custom post types? ==
 
@@ -98,12 +99,16 @@ Please make sure that the problem hasn't been discussed on our forum yet (<a hre
 
 == Screenshots == 
 
-1. Re-attacher plugin work with Portfolio plugin.
-2. Re-attacher plugin work with Gallery plugin. 
+1. The work of the Re-attacher with Portfolio plugin.
+2. The work of the Re-attacher with Gallery plugin (to version 4.3.6). 
 3. Re-attacher plugin on Media library page.
 4. Re-attacher Settings page.
 
 == Changelog ==
+
+= V1.0.4 - 03.11.2015 =
+* Update : Textdomain was changed.
+* Update : We updated all functionality for wordpress 4.3.1.
 
 = V1.0.3 - 27.07.2015 =
 * Update : We updated all functionality for wordpress 4.2.3.
@@ -119,6 +124,9 @@ Please make sure that the problem hasn't been discussed on our forum yet (<a hre
 * Action: plugin release
 
 == Upgrade Notice ==
+
+= V1.0.4 =
+Textdomain was changed. We updated all functionality for wordpress 4.3.1.
 
 = V1.0.3 =
 We updated all functionality for wordpress 4.2.3.
