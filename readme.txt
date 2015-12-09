@@ -3,8 +3,8 @@ Contributors: bestwebsoft
 Donate link: http://bestwebsoft.com/donate/
 Tags: add re-attacher plugin, add attachment plugin, attach, attach image, attach file, attach files, attach multiple files, attach to gallery, attach to portfolio, attached, Attachment, BiND, free plugin, free re-attacher plugin, free attachment plugin, image, plugin, re-attach, re-attacher, re-attacher plugin, re-attech, reatach, reattach, reattacj, unattach, unattachment, wordpress, wp, wp plugin, wp free plugin, wp re-attacher, wp re-attacher plugin, wp simple re-attacher plugin, wp free re-attacher, wp free re-attacher plugin, wordpress plugin, wordpress free plugin, wordpress re-attacher, wordpress re-attacher plugin, wordpress simple re-attacher plugin, wordpress free re-attacher, wordpress free re-attacher plugin
 Requires at least: 3.8
-Tested up to: 4.3.1
-Stable tag: 1.0.4
+Tested up to: 4.4
+Stable tag: 1.0.5
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -99,12 +99,15 @@ Please make sure that the problem hasn't been discussed on our forum yet (<a hre
 
 == Screenshots == 
 
-1. The work of the Re-attacher with Portfolio plugin.
-2. The work of the Re-attacher with Gallery plugin (to version 4.3.6). 
-3. Re-attacher plugin on Media library page.
-4. Re-attacher Settings page.
+1. Re-attacher plugin on Media library page.
+2. Re-attacher Settings page.
+3. The work of the Re-attacher with Portfolio plugin.
+4. The work of the Re-attacher with Gallery plugin (to version 4.3.6). 
 
 == Changelog ==
+
+= V1.0.5 - 09.12.2015 =
+* Bugfix : The bug with plugin menu duplicating was fixed.
 
 = V1.0.4 - 03.11.2015 =
 * Update : Textdomain was changed.
@@ -124,6 +127,9 @@ Please make sure that the problem hasn't been discussed on our forum yet (<a hre
 * Action: plugin release
 
 == Upgrade Notice ==
+
+= V1.0.5 =
+The bug with plugin menu duplicating was fixed.
 
 = V1.0.4 =
 Textdomain was changed. We updated all functionality for wordpress 4.3.1.

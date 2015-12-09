@@ -6,7 +6,7 @@ Description: This plugin allows to attach, unattach or reattach media item in di
 Author: BestWebSoft
 Text Domain: re-attacher
 Domain Path: /languages
-Version: 1.0.4
+Version: 1.0.5
 Author URI: http://bestwebsoft.com/
 License: GPLv3 or later
 */
@@ -29,7 +29,7 @@ License: GPLv3 or later
 
 if ( ! function_exists( 'rttchr_admin_menu' ) ) {
 	function rttchr_admin_menu() {
-		bws_add_general_menu( plugin_basename( __FILE__ ) );
+		bws_general_menu();
 		$settings = add_submenu_page( 'bws_plugins', 'Re-attacher ' . __( 'Settings', 're-attacher' ), 'Re-attacher', 'manage_options', "re-attacher.php", 'rttchr_settings_page' );
 		add_action( 'load-' . $settings, 'rttchr_add_tabs' );	
 	}
@@ -163,7 +163,7 @@ if ( ! function_exists( 'rttchr_settings_page' ) ) {
 		} ?>
 		<!-- Create a page structure -->
 		<div class="wrap">
-			<h2>Re-attacher <?php _e( 'Settings', 're-attacher' ); ?></h2>
+			<h1>Re-attacher <?php _e( 'Settings', 're-attacher' ); ?></h1>
 			<div class="updated fade" <?php if ( ! isset( $_POST['rttchr_submit'] ) ) echo "style='display:none'"; ?>>
 				<p><strong><?php echo $message; ?></strong></p>
 			</div>
