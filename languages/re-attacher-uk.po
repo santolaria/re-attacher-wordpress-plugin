@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Re-attacher\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-11-03 17:34+0300\n"
-"PO-Revision-Date: 2015-11-03 17:34+0300\n"
+"POT-Creation-Date: 2016-04-07 19:45+0300\n"
+"PO-Revision-Date: 2016-04-07 19:47+0300\n"
 "Last-Translator: bestwebsoft.com <plugins@bestwebsoft.com>\n"
 "Language-Team: BestWebSoft <plugin@bestwebsoft.com>\n"
 "Language: ru_UA\n"
@@ -18,8 +18,8 @@ msgstr ""
 "X-Generator: Poedit 1.5.4\n"
 "X-Poedit-SearchPath-0: ..\n"
 
-#: ../re-attacher.php:33 ../re-attacher.php:166 ../re-attacher.php:791
-#: ../re-attacher.php:807
+#: ../re-attacher.php:33 ../re-attacher.php:185 ../re-attacher.php:818
+#: ../re-attacher.php:834
 msgid "Settings"
 msgstr "Налаштування"
 
@@ -29,43 +29,43 @@ msgid ""
 "attacher plugin."
 msgstr "Будь ласка, оновіть Gallery для коректної роботи плагіну Re-attacher."
 
-#: ../re-attacher.php:162
+#: ../re-attacher.php:180
 msgid "Settings saved"
 msgstr "Налаштування збережено"
 
-#: ../re-attacher.php:174
+#: ../re-attacher.php:193
 msgid "Show media files author their files only"
 msgstr "Показувати медіа файли тільки їх авторам"
 
-#: ../re-attacher.php:181
+#: ../re-attacher.php:200
 msgid "Save Changes"
 msgstr "Зберегти зміни "
 
-#: ../re-attacher.php:250
+#: ../re-attacher.php:269
 msgid "You are not allowed to unattach files from this post."
 msgstr "Ви не можете відкріпляти файли з цього посту."
 
-#: ../re-attacher.php:256
+#: ../re-attacher.php:275
 msgid "Error unattaching files from the post."
 msgstr "Помилка відкріплення від посту."
 
-#: ../re-attacher.php:281
+#: ../re-attacher.php:300
 msgid "You are not allowed to edit this post."
 msgstr "Ви не можете редагувати цей пост."
 
-#: ../re-attacher.php:320
+#: ../re-attacher.php:341
 msgid "Select the item that needs to be attached"
 msgstr "Виберіть файл для прикріплення"
 
-#: ../re-attacher.php:321
+#: ../re-attacher.php:342
 msgid "Attach item"
 msgstr "Прикріпити файл"
 
-#: ../re-attacher.php:344
+#: ../re-attacher.php:365
 msgid "NOTICE"
 msgstr "УВАГА"
 
-#: ../re-attacher.php:349
+#: ../re-attacher.php:370
 msgid ""
 "If you want Re-attacher plugin to work correctly, please enable JavaScript "
 "in your browser!"
@@ -73,106 +73,106 @@ msgstr ""
 "Для коректної роботи плагіну Re-attacher необхідно увімкнути JavaScript у "
 "вашому браузері!"
 
-#: ../re-attacher.php:369 ../re-attacher.php:406 ../re-attacher.php:574
-#: ../re-attacher.php:701 ../re-attacher.php:722 ../re-attacher.php:751
+#: ../re-attacher.php:390 ../re-attacher.php:427 ../re-attacher.php:601
+#: ../re-attacher.php:728 ../re-attacher.php:749 ../re-attacher.php:778
 msgid "Unattach"
 msgstr "Відкріпити"
 
-#: ../re-attacher.php:370 ../re-attacher.php:404 ../re-attacher.php:749
+#: ../re-attacher.php:391 ../re-attacher.php:425 ../re-attacher.php:776
 msgid "Reattach"
 msgstr "Переприкріпити"
 
-#: ../re-attacher.php:404 ../re-attacher.php:749
+#: ../re-attacher.php:425 ../re-attacher.php:776
 msgid "Reattach this media item"
 msgstr "Переприкріпити цей медіа файл"
 
-#: ../re-attacher.php:406 ../re-attacher.php:751
+#: ../re-attacher.php:427 ../re-attacher.php:778
 msgid "Unattach this media item"
 msgstr "Відкріпити цей медіа файл"
 
-#: ../re-attacher.php:409 ../re-attacher.php:753
+#: ../re-attacher.php:430 ../re-attacher.php:780
 msgid "Unattached"
 msgstr "Не прикріплено"
 
-#: ../re-attacher.php:411 ../re-attacher.php:754
+#: ../re-attacher.php:432 ../re-attacher.php:781
 msgid "Attach this media item"
 msgstr "Прикріпити цей медіа файл"
 
-#: ../re-attacher.php:411 ../re-attacher.php:754
+#: ../re-attacher.php:432 ../re-attacher.php:781
 msgid "Attach"
 msgstr "Прикріпити"
 
-#: ../re-attacher.php:422
+#: ../re-attacher.php:444
 msgid "Attachment details"
 msgstr "Властивості прикріпленого файлу"
 
-#: ../re-attacher.php:423
+#: ../re-attacher.php:447
 msgid "Already attached"
 msgstr "Уже прикріплено"
 
-#: ../re-attacher.php:434
+#: ../re-attacher.php:459
 msgid "Attach media item to the portfolio"
 msgstr "Прикріпити медіа файл до портфоліо"
 
-#: ../re-attacher.php:544 ../re-attacher.php:623
+#: ../re-attacher.php:571 ../re-attacher.php:650
 msgid "Notice"
 msgstr "Увага"
 
-#: ../re-attacher.php:544 ../re-attacher.php:623
+#: ../re-attacher.php:571 ../re-attacher.php:650
 msgid "this item attached to"
 msgstr "цей файл уже прикріплено до"
 
-#: ../re-attacher.php:544 ../re-attacher.php:623
+#: ../re-attacher.php:571 ../re-attacher.php:650
 msgid "If you attach it to the current "
 msgstr "Якщо ви прикріпите його до поточного(ї)"
 
-#: ../re-attacher.php:544 ../re-attacher.php:623
+#: ../re-attacher.php:571 ../re-attacher.php:650
 msgid "it will disappear from the"
 msgstr "то він стане недоступним у "
 
-#: ../re-attacher.php:556
+#: ../re-attacher.php:583
 msgid "Don`t attach"
 msgstr "Не прикріпляти"
 
-#: ../re-attacher.php:564 ../re-attacher.php:628
+#: ../re-attacher.php:591 ../re-attacher.php:655
 msgid "Warning"
 msgstr "Увага"
 
-#: ../re-attacher.php:564 ../re-attacher.php:628
+#: ../re-attacher.php:591 ../re-attacher.php:655
 msgid "You are not allowed to attach this image"
 msgstr "У вас недостатньо прав, щоб прикріпляти це зображення"
 
-#: ../re-attacher.php:704
+#: ../re-attacher.php:731
 msgid "Nothing attached"
 msgstr "Нічого не прикріплено"
 
-#: ../re-attacher.php:713
+#: ../re-attacher.php:740
 msgid "Choose a media file that will be attached"
 msgstr "Виберіть медіа файли для прикріплення"
 
-#: ../re-attacher.php:713
+#: ../re-attacher.php:740
 msgid "Attach media item to this gallery"
 msgstr "Прикріпити медіа файл до галереї"
 
-#: ../re-attacher.php:739 ../re-attacher.php:767
+#: ../re-attacher.php:766 ../re-attacher.php:794
 msgid "Attached to"
 msgstr "Прикріплено до"
 
-#: ../re-attacher.php:748
+#: ../re-attacher.php:775
 msgid "If you want change the attachment, please click on"
 msgstr ""
 "Якщо ви хочете прикріпити цей файл до іншого посту або ж відкріпити його "
 "зовсім, клікніть"
 
-#: ../re-attacher.php:750
+#: ../re-attacher.php:777
 msgid "or"
 msgstr "чи"
 
-#: ../re-attacher.php:792
+#: ../re-attacher.php:819
 msgid "FAQ"
 msgstr "FAQ"
 
-#: ../re-attacher.php:793
+#: ../re-attacher.php:820
 msgid "Support"
 msgstr "Техпідтримка"
 

@@ -6,12 +6,12 @@ Description: This plugin allows to attach, unattach or reattach media item in di
 Author: BestWebSoft
 Text Domain: re-attacher
 Domain Path: /languages
-Version: 1.0.5
+Version: 1.0.6
 Author URI: http://bestwebsoft.com/
 License: GPLv3 or later
 */
 /*
-	© Copyright 2015  BestWebSoft  ( http://support.bestwebsoft.com )
+	© Copyright 2016  BestWebSoft  ( http://support.bestwebsoft.com )
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License, version 2, as
@@ -73,7 +73,7 @@ if ( ! function_exists( 'rttchr_admin_init' ) ) {
 			$bws_plugin_info = array( 'id' => '182', 'version' => $rttchr_plugin_info['Version'] );
 		}		
 		/* Function check if plugin gallery version */
-		rttchr_gallery_check();
+		rttchr_gallery_portfolio_check();
 		/* Call register settings function */
 		$post_type = '';
 		if ( ! empty( $_POST['post_id'] ) ) {
@@ -92,15 +92,36 @@ if ( ! function_exists( 'rttchr_admin_init' ) ) {
 /* 
 *	Сhecking Gallery Plugin version
 */
-if ( ! function_exists( 'rttchr_gallery_check' ) ) {
-	function rttchr_gallery_check() {
-		global $rttchr_gallery_old_version;
+if ( ! function_exists( 'rttchr_gallery_portfolio_check' ) ) {
+	function rttchr_gallery_portfolio_check() {
+		global $rttchr_gallery_old_version, $rttchr_gallery_portfolio_versions_check;
+		$gallery_active = is_plugin_active( 'gallery-plugin/gallery-plugin.php' );
+		$gallery_pro_active = is_plugin_active( 'gallery-plugin-pro/gallery-plugin-pro.php' );
+		$portfilo_active = is_plugin_active( 'portfolio/portfolio.php' );
+		$portfolio_pro_active = is_plugin_active( 'portfolio-pro/portfolio-pro.php' );
 		/* old version */
-		if ( is_plugin_active( 'gallery-plugin/gallery-plugin.php' ) || is_plugin_active( 'gallery-plugin-pro/gallery-plugin-pro.php' ) ) {
+		if ( $gallery_active || $gallery_pro_active ) {
 			$all_plugins = get_plugins();
 			if ( ( isset( $all_plugins['gallery-plugin/gallery-plugin.php']['Version'] ) && $all_plugins['gallery-plugin/gallery-plugin.php']['Version'] < '4.2.7' ) || 
 				( isset( $all_plugins['gallery-plugin-pro/gallery-plugin-pro.php']['Version'] ) && $all_plugins['gallery-plugin-pro/gallery-plugin-pro.php']['Version'] < '1.4.3' ) ) {		
 				$rttchr_gallery_old_version = __( 'Please update Gallery plugin to make sure it works correctly with Re-attacher plugin.', 're-attacher' );
+			}
+
+			if ( isset( $all_plugins['gallery-plugin/gallery-plugin.php']['Version'] ) && $gallery_active ) {
+				$rttchr_gallery_portfolio_versions_check['gallery'] = $all_plugins['gallery-plugin/gallery-plugin.php']['Version'] > '4.3.5' ? false : true;
+			} elseif ( isset( $all_plugins['gallery-plugin-pro/gallery-plugin-pro.php']['Version'] ) && $gallery_pro_active ) {
+				$rttchr_gallery_portfolio_versions_check['gallery'] = $all_plugins['gallery-plugin-pro/gallery-plugin-pro.php']['Version'] > '1.5.0' ? false : true;
+			}
+		}
+
+		if ( $portfilo_active || $portfolio_pro_active ) {
+			if ( ! isset( $all_plugins ) )
+				$all_plugins = get_plugins();
+
+			if ( isset( $all_plugins['portfolio/portfolio.php']['Version'] ) && $portfilo_active ) {
+				$rttchr_gallery_portfolio_versions_check['portfolio'] = $all_plugins['portfolio/portfolio.php']['Version'] > '2.36' ? false : true;
+			} elseif ( isset( $all_plugins['portfolio-pro/portfolio-pro.php']['Version'] ) && $portfolio_pro_active ) {
+				$rttchr_gallery_portfolio_versions_check['portfolio'] = $all_plugins['portfolio-pro/portfolio-pro.php']['Version'] > '1.0.3' ? false : true;
 			}
 		}
 	}
@@ -115,7 +136,8 @@ if ( ! function_exists( 'rttchr_settings' ) ) {
 		$rttchr_option_defaults = array(
 			'plugin_option_version' 	=> $rttchr_plugin_info['Version'],
 			'media_only_author'			=> '0',
-			'display_settings_notice'	=>	1
+			'display_settings_notice'	=>	1,
+			'suggest_feature_banner'	=>	1
 		);
 		/* Install the option defaults */
 		if ( ! get_option( 'rttchr_options' ) )
@@ -164,7 +186,7 @@ if ( ! function_exists( 'rttchr_settings_page' ) ) {
 		<!-- Create a page structure -->
 		<div class="wrap">
 			<h1>Re-attacher <?php _e( 'Settings', 're-attacher' ); ?></h1>
-			<div class="updated fade" <?php if ( ! isset( $_POST['rttchr_submit'] ) ) echo "style='display:none'"; ?>>
+			<div class="updated fade below-h2" <?php if ( ! isset( $_POST['rttchr_submit'] ) ) echo "style='display:none'"; ?>>
 				<p><strong><?php echo $message; ?></strong></p>
 			</div>
 			<?php bws_show_settings_notice(); ?>
@@ -292,7 +314,7 @@ if ( ! function_exists( 'rttchr_load_post' ) ) {
  */
 if ( ! function_exists( 'rttchr_attach_box_scripts_action' ) ) {	
 	function rttchr_attach_box_scripts_action( $hook ) {
-		global $post;
+		global $post, $rttchr_gallery_portfolio_versions_check;
 		/* check if it's a post edit page and not any other admin page */
 		if ( $hook == 'post-new.php' || $hook == 'post.php' || $hook == 'bws-plugins_page_re-attacher' ) {
 			if ( isset( $_GET['page'] ) && "re-attacher.php" == $_GET['page'] ) {
@@ -304,29 +326,34 @@ if ( ! function_exists( 'rttchr_attach_box_scripts_action' ) ) {
 					wp_enqueue_script( 'wp-ajax-response' );
 					wp_enqueue_script( 'media' );
 				} elseif ( $post->post_type == 'portfolio' || $post->post_type == 'gallery' ) {
-					/* load media library scripts */
-					if ( function_exists( 'wp_enqueue_media' ) ) {
-						wp_enqueue_media();
+					if ( ( isset( $rttchr_gallery_portfolio_versions_check['portfolio'] ) && $rttchr_gallery_portfolio_versions_check['portfolio'] ) ||
+						 ( isset( $rttchr_gallery_portfolio_versions_check['gallery'] ) && $rttchr_gallery_portfolio_versions_check['gallery'] ) ) {
+						/* load media library scripts */
+						if ( function_exists( 'wp_enqueue_media' ) ) {
+							wp_enqueue_media();
+						}
+					
+						wp_enqueue_style( 'editor-buttons' );
+						/* load our css file */
+						wp_enqueue_style( 'rttchr_stylesheet', plugins_url( 'css/style.css', __FILE__ ) );
+						/* load our js file */
+						wp_enqueue_script( 'rttchr_script', plugins_url( 'js/script.js', __FILE__ ), array( 'jquery' ) );
+						wp_localize_script(
+							'rttchr_script',
+							'rttchr',
+							array(
+								'uploaderTitle' 	=> __( 'Select the item that needs to be attached', 're-attacher' ),
+								'uploaderButton'	=> __( 'Attach item', 're-attacher' ),
+								'nonce' 			=> wp_create_nonce( 'set_post_attach_item_' . $post->post_type )
+							)
+						);
 					}
-					wp_enqueue_style( 'editor-buttons' );
-					/* load our css file */
-					wp_enqueue_style( 'rttchr_stylesheet', plugins_url( 'css/style.css', __FILE__ ) );
-					/* load our js file */
-					wp_enqueue_script( 'rttchr_script', plugins_url( 'js/script.js', __FILE__ ), array( 'jquery' ) );
-					wp_localize_script(
-						'rttchr_script',
-						'rttchr',
-						array(
-							'uploaderTitle' 	=> __( 'Select the item that needs to be attached', 're-attacher' ),
-							'uploaderButton'	=> __( 'Attach item', 're-attacher' ),
-							'nonce' 			=> wp_create_nonce( 'set_post_attach_item_' . $post->post_type )
-						)
-					);
 				}
 			}	
 		}
 	}
 }
+
 /**
 *	Add notises installed or not active
 */
@@ -341,7 +368,7 @@ if ( ! function_exists( 'rttchr_show_notices' ) ) {
 		if ( 'plugins.php' == $hook_suffix || ( isset( $_REQUEST['page'] ) && 'bws_plugins' == $_REQUEST['page'] ) || $post_type ) { 
 			if ( '' != $rttchr_gallery_old_version ) { ?>
 				<div class="update-nag">
-					<strong><?php _e( 'NOTICE', 're-attache' ); ?>: </strong><?php echo $rttchr_gallery_old_version ?>
+					<strong><?php _e( 'NOTICE', 're-attacher' ); ?>: </strong><?php echo $rttchr_gallery_old_version ?>
 				</div>
 			<?php } ?>
 			<noscript>
@@ -352,6 +379,9 @@ if ( ! function_exists( 'rttchr_show_notices' ) ) {
 		<?php }
 		if ( 'plugins.php' == $hook_suffix && ! is_network_admin() ) {
 			bws_plugin_banner_to_settings( $rttchr_plugin_info, 'rttchr_options', 're-attacher', 'admin.php?page=re-attacher.php' );
+		}
+		if ( isset( $_REQUEST['page'] ) && 're-attacher.php' == $_REQUEST['page'] ) {
+			bws_plugin_suggest_feature_banner( $rttchr_plugin_info, 'rttchr_options', 're-attacher' );
 		}
 	}
 }
@@ -414,22 +444,27 @@ if ( ! function_exists( 'rttchr_media_custom_columns' ) ) {
 		}
 	}
 }
+
 /**
 *	Add our metabox on page edit image
 */
 if ( ! function_exists( 'rttchr_add_custom_metabox' ) ) {
 	function rttchr_add_custom_metabox(){
+		global $rttchr_gallery_portfolio_versions_check;
 		add_meta_box( 'rttchr_metabox_in_edit', __( 'Attachment details', 're-attacher' ), 'rttchr_attach_box', 'attachment', 'side', 'low' );
-		add_meta_box( 'rttchr_metabox_in_posts', __( 'Already attached', 're-attacher' ), 'rttchr_attach_box_in_post_callback', 'portfolio', 'side', 'low' );
+
+		if ( isset( $rttchr_gallery_portfolio_versions_check['portfolio'] ) && $rttchr_gallery_portfolio_versions_check['portfolio'] )
+			add_meta_box( 'rttchr_metabox_in_posts', __( 'Already attached', 're-attacher' ), 'rttchr_attach_box_in_post_callback', 'portfolio', 'side', 'low' );
 	}
 }
+
 /**
 *	Add buttons attach in portfolio
 */
 if ( ! function_exists( 'rttchr_add_button' ) ) {
 	function rttchr_add_button( $context ) {
-		global $post;
-		if ( isset( $post ) ) {
+		global $post, $rttchr_gallery_portfolio_versions_check;
+		if ( isset( $post ) && isset( $rttchr_gallery_portfolio_versions_check['portfolio'] ) && $rttchr_gallery_portfolio_versions_check['portfolio'] ) {
 			if ( $post->post_type == 'portfolio' ) {
 				$rttchr_button = "<a class='button' href='#' id='rttchr-attach-media-item'>" . __( 'Attach media item to the portfolio', 're-attacher' ) . "</a>";
 				return $context . $rttchr_button;
@@ -437,6 +472,7 @@ if ( ! function_exists( 'rttchr_add_button' ) ) {
 		}
 	}
 }
+
 /**
 *	Add place for notice in media upoader for portfolio	
 *
@@ -856,6 +892,10 @@ if ( ! function_exists( 'rttchr_delete_options' ) ) {
 		} else {
 			delete_option( 'rttchr_options' );
 		}
+
+		require_once( dirname( __FILE__ ) . '/bws_menu/bws_include.php' );
+		bws_include_init( plugin_basename( __FILE__ ) );
+		bws_delete_plugin( plugin_basename( __FILE__ ) );
 	}
 }
 

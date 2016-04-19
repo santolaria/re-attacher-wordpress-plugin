@@ -3,8 +3,8 @@ Contributors: bestwebsoft
 Donate link: http://bestwebsoft.com/donate/
 Tags: add re-attacher plugin, add attachment plugin, attach, attach image, attach file, attach files, attach multiple files, attach to gallery, attach to portfolio, attached, Attachment, BiND, free plugin, free re-attacher plugin, free attachment plugin, image, plugin, re-attach, re-attacher, re-attacher plugin, re-attech, reatach, reattach, reattacj, unattach, unattachment, wordpress, wp, wp plugin, wp free plugin, wp re-attacher, wp re-attacher plugin, wp simple re-attacher plugin, wp free re-attacher, wp free re-attacher plugin, wordpress plugin, wordpress free plugin, wordpress re-attacher, wordpress re-attacher plugin, wordpress simple re-attacher plugin, wordpress free re-attacher, wordpress free re-attacher plugin
 Requires at least: 3.8
-Tested up to: 4.4
-Stable tag: 1.0.5
+Tested up to: 4.5
+Stable tag: 1.0.6
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -29,6 +29,8 @@ http://www.youtube.com/watch?v=-EoT_zQJqHM
 * Attach any media file to your gallery or portfolio
 * Information on the files that are already attached
 
+If you have a feature, suggestion or idea you'd like to see in the plugin, we'd love to hear about it! <a href="http://support.bestwebsoft.com/hc/en-us/requests/new" target="_blank">Suggest a Feature</a>
+
 = Recommended Plugins = 
 
 The author of the Re-attacher also recommends the following plugins:
@@ -49,7 +51,7 @@ If you would like to create your own language pack or update the existing one, y
 
 = Technical support =
 
-Dear users, our plugins are available for free download. If you have any questions or recommendations regarding the functionality of our plugins (existing options, new options, current issues), please feel free to contact us. Please note that we accept requests in English only. All messages in another languages won't be accepted.
+Dear users, our plugins are available for free download. If you have any questions or recommendations regarding the functionality of our plugins (existing options, new options, current issues), please feel free to contact us. Please note that we accept requests in English only. All messages in other languages won't be accepted.
 
 If you notice any bugs in the plugin's work, you can notify us about them and we'll investigate and fix the issue then. Your request should contain website URL, issues description and WordPress admin panel credentials.
 Moreover, we can customize the plugin to match your requirements. It's a paid service (as a rule it costs $40, but the price can vary depending on the amount of the necessary changes and their complexity). Please note that we could also include this or that feature (developed for you) in the next release and share with the other users then.
@@ -106,6 +108,9 @@ Please make sure that the problem hasn't been discussed on our forum yet (<a hre
 
 == Changelog ==
 
+= V1.0.6 - 19.04.2016 =
+* Update : Compatibility with Portfolio by BestWebSoft V2.37 and Portfolio Pro by BestWebSoft V1.0.4.
+
 = V1.0.5 - 09.12.2015 =
 * Bugfix : The bug with plugin menu duplicating was fixed.
 
@@ -127,6 +132,9 @@ Please make sure that the problem hasn't been discussed on our forum yet (<a hre
 * Action: plugin release
 
 == Upgrade Notice ==
+
+= V1.0.6 =
+Compatibility with Portfolio by BestWebSoft V2.37 and Portfolio Pro by BestWebSoft V1.0.4.
 
 = V1.0.5 =
 The bug with plugin menu duplicating was fixed.
