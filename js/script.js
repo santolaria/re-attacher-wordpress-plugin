@@ -37,7 +37,7 @@
 					attachments.push( i.id );
 				} );
 				rttchr_media_attach( wp.media.view.settings.post.id, attachments );
-			});			
+			});
 			/*  Initialization windows loader Gallery */
 			var gallery_uploader = wp.media( {
 				id:			'rttchr_portfolio_frame',
@@ -52,11 +52,11 @@
 				} );
 				rttchr_gallery_attach( wp.media.view.settings.post.id, attachments );
 			});
-			/* Call media window for re-attacher in page portfolio */		
+			/* Call media window for re-attacher in page portfolio */
 			$( '#wp-content-media-buttons' ).on( 'click', '#rttchr-attach-media-item', function( e ) {
 				e.preventDefault();
 				e.stopPropagation();
-				portfolio_uploader.open();	
+				portfolio_uploader.open();
 			} );
 			/* Action to click  unattach in metabox on page portfolio */
 			$( '#rttchr_metabox_in_posts' ).on( 'click', '.rttchr-unattach-media-item', function( e ) {
@@ -65,20 +65,20 @@
 				var unattachId = $( this ).attr( "id" );
 				rttchr_media_attach( wp.media.view.settings.post.id, -1, unattachId );
 			});
-			/* Call media window for re-attacher in page gallery */		
+			/* Call media window for re-attacher in page gallery */
 			$( '#rttchr-gallery-media-buttons' ).on( 'click', '#rttchr-attach-media-item', function( e ) {
 				e.preventDefault();
-				e.stopPropagation();	
+				e.stopPropagation();
 				gallery_uploader.open();
 			});
 			/* Action to click "don`t attach" for re-attacher in page gallery */
 			$( '#rttchr_preview_media' ).on( 'click', '.rttchr-noattach-media-item', function( e ) {
 				e.preventDefault();
-				e.stopPropagation();	
+				e.stopPropagation();
 				$( this ).parent().remove();
 			});
-		}	
-	});	
+		}
+	});
 })( jQuery );
 /* Create preview on a gallery page */
 function rttchr_img_unattach( id ) {
@@ -102,13 +102,13 @@ function rttchr_portfolio_notice_wiev( data_id ) {
 				url: "/wp-admin/admin-ajax.php",
 				type: "POST",
 				data: "action=portfolio_notice&portfolio_post_id=" + post_id + "&portfolio_thumbnail_id=" + thumb_id + "&nonce=" + rttchr.nonce + "&post_type="+ typenow + "",
-				success: function( html ) {				
+				success: function( html ) {
 					if ( undefined != html.data ){
 						$( "#rttchr_portfolio_frame" ).find( "#rttchr_portfolio_notice" ).html( html.data );
 					}
 				}
-			});	
+			});
 		}
-		rttchr_notice_media_attach( wp.media.view.settings.post.id, data_id, typenow ); 
+		rttchr_notice_media_attach( wp.media.view.settings.post.id, data_id, typenow );
 	})( jQuery );
 }

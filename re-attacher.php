@@ -6,7 +6,7 @@ Description: This plugin allows to attach, unattach or reattach media item in di
 Author: BestWebSoft
 Text Domain: re-attacher
 Domain Path: /languages
-Version: 1.0.6
+Version: 1.0.7
 Author URI: http://bestwebsoft.com/
 License: GPLv3 or later
 */
@@ -30,8 +30,8 @@ License: GPLv3 or later
 if ( ! function_exists( 'rttchr_admin_menu' ) ) {
 	function rttchr_admin_menu() {
 		bws_general_menu();
-		$settings = add_submenu_page( 'bws_plugins', 'Re-attacher ' . __( 'Settings', 're-attacher' ), 'Re-attacher', 'manage_options', "re-attacher.php", 'rttchr_settings_page' );
-		add_action( 'load-' . $settings, 'rttchr_add_tabs' );	
+		$settings = add_submenu_page( 'bws_panel', 'Re-attacher ' . __( 'Settings', 're-attacher' ), 'Re-attacher', 'manage_options', "re-attacher.php", 'rttchr_settings_page' );
+		add_action( 'load-' . $settings, 'rttchr_add_tabs' );
 	}
 }
 /**
@@ -47,7 +47,7 @@ if ( ! function_exists( 'rttchr_plugins_loaded' ) ) {
 */
 if ( ! function_exists( 'rttchr_init' ) ) {
 	function rttchr_init() {
-		global $rttchr_plugin_info;	
+		global $rttchr_plugin_info;
 
 		require_once( dirname( __FILE__ ) . '/bws_menu/bws_include.php' );
 		bws_include_init( plugin_basename( __FILE__ ) );
@@ -63,7 +63,7 @@ if ( ! function_exists( 'rttchr_init' ) ) {
 	}
 }
 /**
-*  chek settings, check gallery version 
+*  chek settings, check gallery version
 */
 if ( ! function_exists( 'rttchr_admin_init' ) ) {
 	function rttchr_admin_init() {
@@ -71,7 +71,7 @@ if ( ! function_exists( 'rttchr_admin_init' ) ) {
 		/* Add variable for bws_menu */
 		if ( ! isset( $bws_plugin_info ) || empty( $bws_plugin_info ) ) {
 			$bws_plugin_info = array( 'id' => '182', 'version' => $rttchr_plugin_info['Version'] );
-		}		
+		}
 		/* Function check if plugin gallery version */
 		rttchr_gallery_portfolio_check();
 		/* Call register settings function */
@@ -83,13 +83,13 @@ if ( ! function_exists( 'rttchr_admin_init' ) ) {
 			}
 		}
 		if ( ( isset( $_GET['page'] ) && "re-attacher.php" == $_GET['page'] ) || ( 'gallery' == $post_type || 'portfolio' == $post_type ) || false !== strpos( $_SERVER[ 'REQUEST_URI' ], '/wp-admin/upload.php' ) ) {
-			rttchr_settings();			
+			rttchr_settings();
 		}
 		/* Call filter for author function */
 		rttchr_use_filter_for_uthor();
 	}
 }
-/* 
+/*
 *	Сhecking Gallery Plugin version
 */
 if ( ! function_exists( 'rttchr_gallery_portfolio_check' ) ) {
@@ -102,8 +102,8 @@ if ( ! function_exists( 'rttchr_gallery_portfolio_check' ) ) {
 		/* old version */
 		if ( $gallery_active || $gallery_pro_active ) {
 			$all_plugins = get_plugins();
-			if ( ( isset( $all_plugins['gallery-plugin/gallery-plugin.php']['Version'] ) && $all_plugins['gallery-plugin/gallery-plugin.php']['Version'] < '4.2.7' ) || 
-				( isset( $all_plugins['gallery-plugin-pro/gallery-plugin-pro.php']['Version'] ) && $all_plugins['gallery-plugin-pro/gallery-plugin-pro.php']['Version'] < '1.4.3' ) ) {		
+			if ( ( isset( $all_plugins['gallery-plugin/gallery-plugin.php']['Version'] ) && $all_plugins['gallery-plugin/gallery-plugin.php']['Version'] < '4.2.7' ) ||
+				( isset( $all_plugins['gallery-plugin-pro/gallery-plugin-pro.php']['Version'] ) && $all_plugins['gallery-plugin-pro/gallery-plugin-pro.php']['Version'] < '1.4.3' ) ) {
 				$rttchr_gallery_old_version = __( 'Please update Gallery plugin to make sure it works correctly with Re-attacher plugin.', 're-attacher' );
 			}
 
@@ -126,7 +126,7 @@ if ( ! function_exists( 'rttchr_gallery_portfolio_check' ) ) {
 		}
 	}
 }
-/* 
+/*
 *	Register settings function
 */
 if ( ! function_exists( 'rttchr_settings' ) ) {
@@ -151,30 +151,30 @@ if ( ! function_exists( 'rttchr_settings' ) ) {
 			$rttchr_options = array_merge( $rttchr_option_defaults, $rttchr_options );
 			$rttchr_options['plugin_option_version'] = $rttchr_plugin_info['Version'];
 			update_option( 'rttchr_options', $rttchr_options );
-		}		
+		}
 	}
 }
 /*
-*	Function to filter media files for author 
+*	Function to filter media files for author
 *
 */
 if ( ! function_exists( 'rttchr_use_filter_for_uthor' ) ) {
-	function rttchr_use_filter_for_uthor() {	
+	function rttchr_use_filter_for_uthor() {
 		global $rttchr_options;
 		if ( ! empty( $rttchr_options ) ) {
 			if ( 1 == $rttchr_options['media_only_author'] ) {
 				add_action( 'pre_get_posts', 'rttchr_author_media_action' );
 				add_filter( 'parse_query', 'rttchr_author_media_filter' );
 			}
-		}	
+		}
 	}
 }
-/* 
-*	Function is forming page of the settings of this plugin 
+/*
+*	Function is forming page of the settings of this plugin
 *
 */
 if ( ! function_exists( 'rttchr_settings_page' ) ) {
-	function rttchr_settings_page() { 
+	function rttchr_settings_page() {
 		global $wpdb, $rttchr_options, $rttchr_plugin_info;
 		$message = '';
 		/* Check if you pressed Save Changes */
@@ -194,11 +194,11 @@ if ( ! function_exists( 'rttchr_settings_page' ) ) {
 				<table class="form-table">
 					<tr>
 						<th><?php _e( 'Show media files author their files only', 're-attacher' ); ?></th>
-						<td>		
+						<td>
 							<label><input type="checkbox" name="rttchr_media_only_author" value="1" <?php if ( 1 == $rttchr_options['media_only_author'] ) echo "checked='checked' "; ?>/></label>
 						</td>
 					</tr>
-				</table>				
+				</table>
 				<p class="submit">
 					<input id="bws-submit-button" type="submit" class="button-primary" value="<?php _e( 'Save Changes', 're-attacher' ) ?>" />
 					<input type="hidden" name="rttchr_submit" value="submit" />
@@ -206,7 +206,7 @@ if ( ! function_exists( 'rttchr_settings_page' ) ) {
 				</p>
 			</form>
 			<?php bws_plugin_reviews_block( $rttchr_plugin_info['Name'], 're-attacher' ); ?>
-		</div>		
+		</div>
 	<?php }
 }
 /*
@@ -237,7 +237,7 @@ if ( ! function_exists( 'rttchr_custom_bulk_action' ) ) {
 					wp_redirect( $place );
 					exit;
 				}
-			}	
+			}
 			exit;
 		}
 		/* If the button is pressed bulk action unattach */
@@ -256,7 +256,7 @@ if ( ! function_exists( 'rttchr_custom_bulk_action' ) ) {
 				$post_ids = array_map( 'intval', $_REQUEST['media'] );
 			}
 			if ( empty( $post_ids ) ) {
-				return; 
+				return;
 			}
 			/* this is based on wp-admin/edit.php */
 			$sendback = remove_query_arg( array( 'unattached', 'untrashed', 'deleted', 'ids' ), wp_get_referer() );
@@ -292,11 +292,11 @@ if ( ! function_exists( 'rttchr_custom_bulk_action' ) ) {
 /**
 * Save change result after click re-attach or attach in our metabox on edit image page
 */
-if ( ! function_exists( 'rttchr_load_post' ) ) {	
+if ( ! function_exists( 'rttchr_load_post' ) ) {
 	function rttchr_load_post (){
 		global $wpdb;
 		if ( isset ( $_REQUEST['_ajax_nonce'] ) && isset ( $_REQUEST['found_post_id'] ) && isset ( $_REQUEST['post_type'] ) && 'attachment' == $_REQUEST['post_type'] ) {
-			wp_verify_nonce( $_REQUEST['_ajax_nonce'], 'find-posts' ); /* generated in find posts div requester*/	
+			wp_verify_nonce( $_REQUEST['_ajax_nonce'], 'find-posts' ); /* generated in find posts div requester*/
 			$parent_id = intval( $_REQUEST['found_post_id'] ); /* found so > 0 */
 			$att_id = $_REQUEST['post_ID'];
 			if ( $parent_id > 0 && ! current_user_can( 'edit_post', $parent_id ) ) {
@@ -305,14 +305,14 @@ if ( ! function_exists( 'rttchr_load_post' ) ) {
 			$attached = $wpdb->update( $wpdb->posts, array( 'post_parent' => $parent_id ),array( 'ID' => intval( $att_id ), 'post_type' => 'attachment' ) );
 			clean_attachment_cache( $att_id );
 			$_GET['message'] = 1;
-		}		
+		}
 	}
 }
 /**
  * Enqueue admin scripts.
  * @param $hook string
  */
-if ( ! function_exists( 'rttchr_attach_box_scripts_action' ) ) {	
+if ( ! function_exists( 'rttchr_attach_box_scripts_action' ) ) {
 	function rttchr_attach_box_scripts_action( $hook ) {
 		global $post, $rttchr_gallery_portfolio_versions_check;
 		/* check if it's a post edit page and not any other admin page */
@@ -332,7 +332,7 @@ if ( ! function_exists( 'rttchr_attach_box_scripts_action' ) ) {
 						if ( function_exists( 'wp_enqueue_media' ) ) {
 							wp_enqueue_media();
 						}
-					
+
 						wp_enqueue_style( 'editor-buttons' );
 						/* load our css file */
 						wp_enqueue_style( 'rttchr_stylesheet', plugins_url( 'css/style.css', __FILE__ ) );
@@ -349,7 +349,7 @@ if ( ! function_exists( 'rttchr_attach_box_scripts_action' ) ) {
 						);
 					}
 				}
-			}	
+			}
 		}
 	}
 }
@@ -358,14 +358,14 @@ if ( ! function_exists( 'rttchr_attach_box_scripts_action' ) ) {
 *	Add notises installed or not active
 */
 if ( ! function_exists( 'rttchr_show_notices' ) ) {
-	function rttchr_show_notices() { 
-		global $hook_suffix, $rttchr_gallery_old_version, $post, $rttchr_plugin_info;	
+	function rttchr_show_notices() {
+		global $hook_suffix, $rttchr_gallery_old_version, $post, $rttchr_plugin_info;
 		$post_type = ( isset( $post ) ) ? $post->post_type == 'gallery' : false;
 		if ( isset( $_GET['post_type'] ) && empty( $post ) ) {
 			if ( $_GET['post_type'] == "gallery" )
 				$post_type = true;
 		}
-		if ( 'plugins.php' == $hook_suffix || ( isset( $_REQUEST['page'] ) && 'bws_plugins' == $_REQUEST['page'] ) || $post_type ) { 
+		if ( 'plugins.php' == $hook_suffix || ( isset( $_REQUEST['page'] ) && 'bws_plugins' == $_REQUEST['page'] ) || $post_type ) {
 			if ( '' != $rttchr_gallery_old_version ) { ?>
 				<div class="update-nag">
 					<strong><?php _e( 'NOTICE', 're-attacher' ); ?>: </strong><?php echo $rttchr_gallery_old_version ?>
@@ -426,7 +426,7 @@ if ( ! function_exists( 'rttchr_media_custom_columns' ) ) {
 			if ( $post->post_parent > 0 ) {
 				if ( get_post( $post->post_parent ) ) {
 					$title =_draft_or_post_title( $post->post_parent );
-					$url_rttchr = wp_nonce_url( admin_url( 'upload.php?action=unattach&rttchr=true&id=' . $post->ID ), 'unattach' );	
+					$url_rttchr = wp_nonce_url( admin_url( 'upload.php?action=unattach&rttchr=true&id=' . $post->ID ), 'unattach' );
 				} ?>
 				<strong><a href="<?php echo get_edit_post_link( $post->post_parent ); ?>"><?php echo $title; ?></a></strong> <?php echo get_the_time( 'Y/m/d' ); ?>
 				<br />
@@ -474,15 +474,15 @@ if ( ! function_exists( 'rttchr_add_button' ) ) {
 }
 
 /**
-*	Add place for notice in media upoader for portfolio	
+*	Add place for notice in media upoader for portfolio
 *
 *	See wp_print_media_templates() in "wp-includes/media-template.php"
 */
 if ( ! function_exists( 'rttchr_print_media_templates' ) ) {
 	function rttchr_print_media_templates() {
-		global $post;
-		if ( isset( $post ) ) {
-			if ( $post->post_type == 'portfolio' || $post->post_type == 'gallery' ){	
+		global $post, $rttchr_gallery_portfolio_versions_check;
+		if ( isset( $post ) && isset( $rttchr_gallery_portfolio_versions_check['portfolio'] ) && $rttchr_gallery_portfolio_versions_check['portfolio'] ) {
+			if ( $post->post_type == 'portfolio' || $post->post_type == 'gallery' ){
 				$image_info = '<# rttchr_portfolio_notice_wiev( data.id ); #><div id="rttchr_portfolio_notice" class="upload-errors"></div>'; ?>
 				<script>
 					( function ($) {
@@ -535,11 +535,11 @@ if ( ! function_exists( 'rttchr_attach_box_ajax_action' ) ) {
 			}
 		}
 		/* return answer on page */
-		if ( $success ) { 
+		if ( $success ) {
 			$return = rttchr_metabox_content_in_post( $post_ID, $wpdb );
 			wp_send_json_success( $return );
-			exit;			
-		}	
+			exit;
+		}
 		wp_die( 0 );
 	}
 }
@@ -569,9 +569,9 @@ if ( ! function_exists( 'rttchr_attach_galery_ajax_action' ) ) {
 				$atachment_detail = get_post( $thumbnail_id );
 				$atachment_parent =	$atachment_detail->post_parent;
 				$atachment_author =	$atachment_detail->post_author;
-				if ( current_user_can( 'edit_others_posts' ) || ( $atachment_author == $user_id ) ) { 
+				if ( current_user_can( 'edit_others_posts' ) || ( $atachment_author == $user_id ) ) {
 					/* Check whether there is a parent in the image of chosen if there is a warning is displayed */
-					if ( isset( $atachment_parent ) && $atachment_parent != 0 && $atachment_parent != $post_ID ) {						
+					if ( isset( $atachment_parent ) && $atachment_parent != 0 && $atachment_parent != $post_ID ) {
 						$parent_detail = get_post( $atachment_parent );
 						if ( ! empty( $parent_detail ) ) {
 							if ( ( $parent_detail->post_type == 'gallery' || $parent_detail->post_type == 'portfolio' ) && $parent_detail->post_status != 'trash' ) {
@@ -584,7 +584,7 @@ if ( ! function_exists( 'rttchr_attach_galery_ajax_action' ) ) {
 							wp_die( 0 );
 					} else
 						$notice_attach ='';
-					/* draw thumbnail*/ 
+					/* draw thumbnail*/
 					if ( preg_match( '/image/', $atachment_detail->post_mime_type ) ) {
 						$img_preview = wp_get_attachment_image( $thumbnail_id, $size, true );
 						$meta_data = wp_get_attachment_metadata( $thumbnail_id );
@@ -611,10 +611,10 @@ if ( ! function_exists( 'rttchr_attach_galery_ajax_action' ) ) {
 				$success = true;
 			}
 		}
-		/* return answer on page */ 
-		if ( $success ) { 
+		/* return answer on page */
+		if ( $success ) {
 			wp_send_json_success( $return );
-			exit;			
+			exit;
 		}
 		wp_die( 0 );
 	}
@@ -635,18 +635,18 @@ if ( ! function_exists( 'rttchr_attach_portfolio_ajax_action' ) ) {
 		global $wpdb, $post;
 		$curent_detail = get_post( $post_ID );
 		$user_id = get_current_user_id();
-		$curent_type = $curent_detail->post_type;		
+		$curent_type = $curent_detail->post_type;
 		$thumbnail_id = ( isset( $_POST['portfolio_thumbnail_id'] ) ) ? $_POST['portfolio_thumbnail_id'] : false;
-		$notice_attach = "";	
+		$notice_attach = "";
 		if ( $thumbnail_id ) {
-			/*get information about the selected item */ 
+			/*get information about the selected item */
 			$atachment_detail = get_post( $thumbnail_id );
 			if ( ! isset( $atachment_detail ) || empty( $atachment_detail ) ) {
 				wp_die( 0 );
 			}
 			$atachment_parent = $atachment_detail->post_parent;
 			$atachment_author =	$atachment_detail->post_author;
-			/*If the user meets the conditions and the highlighted item has a parent displays a warning */ 
+			/*If the user meets the conditions and the highlighted item has a parent displays a warning */
 			if ( isset ( $atachment_parent ) && ( current_user_can( 'edit_others_posts' ) || $atachment_author == $user_id ) ) {
 				if ( $atachment_parent != 0 && $atachment_parent != $post_ID ) {
 					$parent_detail = get_post( $atachment_parent );
@@ -664,8 +664,8 @@ if ( ! function_exists( 'rttchr_attach_portfolio_ajax_action' ) ) {
 				$notice_attach = "<div class='upload-error'><strong>" . __( 'Warning', 're-attacher' ) . ": </strong>" . __( 'You are not allowed to attach this image', 're-attacher' ) . "</div>";
 
 			/* If everything went successfully returns the message */
-			if ( ! empty( $atachment_parent ) || $atachment_author != $user_id ) { 
-				wp_send_json_success( $notice_attach );			
+			if ( ! empty( $atachment_parent ) || $atachment_author != $user_id ) {
+				wp_send_json_success( $notice_attach );
 			}
 			wp_die( 0 );
 		}
@@ -681,7 +681,7 @@ if ( ! function_exists( 'rttchr_save_change_gallery' ) ) {
 			if ( $post->post_type == 'gallery' ) {
 				if ( isset( $_REQUEST['img_unattach'] ) && is_array( $_REQUEST['img_unattach'] ) ) {
 					foreach ( $_REQUEST['img_unattach'] as $unattach_id ) {
-						$wpdb->query( $wpdb->prepare( "UPDATE $wpdb->posts SET `post_parent` = %d WHERE ID = %d", 0, $unattach_id ) );		
+						$wpdb->query( $wpdb->prepare( "UPDATE $wpdb->posts SET `post_parent` = %d WHERE ID = %d", 0, $unattach_id ) );
 					}
 				}
 				if ( isset( $_REQUEST['img_attach'] ) && is_array( $_REQUEST['img_attach'] ) ) {
@@ -711,7 +711,7 @@ if ( ! function_exists( 'rttchr_author_media_action' ) ) {
 /**
  *	Callback function for our metabox on page edit post.
 */
-if ( ! function_exists( 'rttchr_attach_box_in_post_callback' ) ) {	
+if ( ! function_exists( 'rttchr_attach_box_in_post_callback' ) ) {
 	function rttchr_attach_box_in_post_callback(){
 		echo rttchr_metabox_content_in_post();
 	}
@@ -719,24 +719,24 @@ if ( ! function_exists( 'rttchr_attach_box_in_post_callback' ) ) {
 /**
  *	Return content for Callback function for our metabox on page edit post.
 */
-if ( ! function_exists( 'rttchr_metabox_content_in_post' ) ) {	
+if ( ! function_exists( 'rttchr_metabox_content_in_post' ) ) {
 	function rttchr_metabox_content_in_post( $post_ID = '', $ajax_wpdb = '' ) {
 		global $wpdb, $post;
 		/* check the input parameters */
 		$self_wpdb = ( ! empty( $wpdb ) ) ? $wpdb : $ajax_wpdb;
 		$post_id = ( empty( $post_ID ) ) ? $post->ID : $post_ID;
 		/* create a button call the library */
-		$content = ''; 
-		$attach = $self_wpdb->get_results( "SELECT `ID` FROM $self_wpdb->posts WHERE `post_parent` = $post_id and `post_type` = 'attachment'" );/* show attachments if there */ 	
-		if ( $attach ) {		
+		$content = '';
+		$attach = $self_wpdb->get_results( "SELECT `ID` FROM $self_wpdb->posts WHERE `post_parent` = $post_id and `post_type` = 'attachment'" );/* show attachments if there */
+		if ( $attach ) {
 			$content_width		= 250;
 			$thumbnail_html		= '';
 			$size				= count( $attach ) == 1 ? array( $content_width, $content_width ) : array( 50, 50 );
 			foreach ( $attach as $attachment ) {
 				$img_preview = wp_get_attachment_image( $attachment->ID, $size, true );
-				$content .= "<div class='rttchr-details'><a class='hide-if-no-js rttchr-unattach-media-item' id=" . $attachment->ID . " href='#' title=" . __( 'Unattach', 're-attacher' ) . ">" . __( 'Unattach', 're-attacher' ) . "</a>" . $img_preview . "</div>" ;			 
-			} 	
-		} else 
+				$content .= "<div class='rttchr-details'><a class='hide-if-no-js rttchr-unattach-media-item' id=" . $attachment->ID . " href='#' title=" . __( 'Unattach', 're-attacher' ) . ">" . __( 'Unattach', 're-attacher' ) . "</a>" . $img_preview . "</div>" ;
+			}
+		} else
 			$content = __( 'Nothing attached', 're-attacher' );
 		return $content;
 	}
@@ -744,7 +744,7 @@ if ( ! function_exists( 'rttchr_metabox_content_in_post' ) ) {
 /**
  *	Function for button on page gallery.
 */
-if ( ! function_exists( 'rttchr_add_button_in_gallery' ) ) {	
+if ( ! function_exists( 'rttchr_add_button_in_gallery' ) ) {
 	function rttchr_add_button_in_gallery() {
 		echo "<div id='rttchr-gallery-media-buttons' class='hide-if-no-js'><span class='rttchr-button-title'>" . __( 'Choose a media file that will be attached', 're-attacher' ) . ':' . "</span></br><a class='button' href='#' id='rttchr-attach-media-item'>" . __( 'Attach media item to this gallery', 're-attacher' ) . "</a></div><div id='rttchr_preview_media'></div>";
 	}
@@ -762,7 +762,7 @@ if ( ! function_exists( 'rttchr_add_button_unattach_gallery' ) ) {
 /**
 *	Create our metabox on page edit image
 */
-if ( ! function_exists( 'rttchr_attach_box' ) ) {	
+if ( ! function_exists( 'rttchr_attach_box' ) ) {
 	function rttchr_attach_box() {
 		global $post;
 		if ( ! empty( $post ) ) {
@@ -770,7 +770,7 @@ if ( ! function_exists( 'rttchr_attach_box' ) ) {
 				$title = _draft_or_post_title( $post->post_parent );
 				$parent= get_post( $post->post_parent);
 				$parent_type = get_post_type_object( $parent->post_type );
-				$url_rttchr = wp_nonce_url( admin_url( 'upload.php?action=unattach&rttchr=true&id=' . $post->ID ), 'unattach' );?> 
+				$url_rttchr = wp_nonce_url( admin_url( 'upload.php?action=unattach&rttchr=true&id=' . $post->ID ), 'unattach' );?>
 				<p>
 					<?php _e( 'Attached to', 're-attacher' ) ?>:
 					<strong>
@@ -782,16 +782,16 @@ if ( ! function_exists( 'rttchr_attach_box' ) ) {
 					</strong>
 				</p>
 				<p><?php _e( 'If you want change the attachment, please click on', 're-attacher' ); ?></p>
-				<a class="hide-if-no-js" onclick="findPosts.open( 'media[]','<?php echo $post->ID ?>' );return false;" href="#the-list" title="<?php _e( 'Reattach this media item', 're-attacher' ); ?>"><?php _e( 'Reattach', 're-attacher' ); ?></a> 
-				<?php _e( 'or', 're-attacher' ) ?> 
-				<a class="hide-if-no-js" href="<?php echo esc_url( $url_rttchr ); ?>" title="<?php _e( 'Unattach this media item', 're-attacher' ); ?>"><?php _e( 'Unattach', 're-attacher' ) ?></a> 
+				<a class="hide-if-no-js" onclick="findPosts.open( 'media[]','<?php echo $post->ID ?>' );return false;" href="#the-list" title="<?php _e( 'Reattach this media item', 're-attacher' ); ?>"><?php _e( 'Reattach', 're-attacher' ); ?></a>
+				<?php _e( 'or', 're-attacher' ) ?>
+				<a class="hide-if-no-js" href="<?php echo esc_url( $url_rttchr ); ?>" title="<?php _e( 'Unattach this media item', 're-attacher' ); ?>"><?php _e( 'Unattach', 're-attacher' ) ?></a>
 			<?php } else { ?>
 				( <?php _e( 'Unattached', 're-attacher' ); ?> )<br />
 				<a class="hide-if-no-js" onclick="findPosts.open( 'media[]','<?php echo $post->ID ?>' );return false;" href="#the-list" title="<?php _e( 'Attach this media item', 're-attacher' ); ?>"><?php _e( 'Attach', 're-attacher' ); ?></a>
 			<?php } ?>
 			<div id="ajax-response"></div>
 			<?php find_posts_div();
-		} 
+		}
 	}
 }
 /*
@@ -837,7 +837,7 @@ if ( ! function_exists( 'rttchr_plugin_action_links' ) ) {
 		if ( ! is_network_admin() ) {
 			/* Static so we don't call plugin_basename on every plugin row. */
 			static $this_plugin;
-			if ( ! $this_plugin ) 
+			if ( ! $this_plugin )
 				$this_plugin = plugin_basename( __FILE__ );
 			if ( $file == $this_plugin ){
 				$settings_link = '<a href="admin.php?page=re-attacher.php">' . __( 'Settings', 're-attacher' ) . '</a>';
@@ -848,7 +848,7 @@ if ( ! function_exists( 'rttchr_plugin_action_links' ) ) {
 	}
 }
 /**
-*	restrict authors to only being able to view media that they've uploaded 
+*	restrict authors to only being able to view media that they've uploaded
 */
 if ( ! function_exists( 'rttchr_author_media_filter' ) ) {
 	function rttchr_author_media_filter( $wp_query ) {
@@ -859,7 +859,7 @@ if ( ! function_exists( 'rttchr_author_media_filter' ) ) {
 			$wp_query->set( 'author', $current_user->ID );
 		}
 	}
-}	
+}
 
 /* add help tab  */
 if ( ! function_exists( 'rttchr_add_tabs' ) ) {
@@ -873,7 +873,7 @@ if ( ! function_exists( 'rttchr_add_tabs' ) ) {
 	}
 }
 
-/* 
+/*
 *	Function for delete options
 */
 if ( ! function_exists( 'rttchr_delete_options' ) ) {
@@ -908,7 +908,7 @@ add_action( 'init', 'rttchr_init' );
 add_action( 'admin_init', 'rttchr_admin_init' );
 add_action( 'plugins_loaded', 'rttchr_plugins_loaded' );
 /*	Implements a bulk action for unattaching items in bulk. */
- add_action( 'load-upload.php', 'rttchr_custom_bulk_action' ); 
+ add_action( 'load-upload.php', 'rttchr_custom_bulk_action' );
 /*	Save change result after click in our metabox on edit image page */
 add_action( 'load-post.php', 'rttchr_load_post' );
 /*	Enqueue admin scripts. */
@@ -916,7 +916,7 @@ add_action( 'admin_enqueue_scripts', 'rttchr_attach_box_scripts_action' );
 /*	Add notises installed or not active */
 add_action( 'admin_notices', 'rttchr_show_notices' );
 /*	Adds new buld actions 'unattach' and 're-attach' to the media lib. */
-add_action( 'admin_footer', 'rttchr_custom_bulk_admin_footer' ); 
+add_action( 'admin_footer', 'rttchr_custom_bulk_admin_footer' );
 /*	Show are Columns content */
 add_action( 'manage_media_custom_column', 'rttchr_media_custom_columns', 0, 2 );
 /*	Add our metabox on page edit image end page edit post */
@@ -928,9 +928,9 @@ add_action( 'print_media_templates', 'rttchr_print_media_templates', 11 );
 /*	Ajax callback for attaching/detaching alternative thumbnail to post */
 add_action( 'wp_ajax_add_attachment_item', 'rttchr_attach_box_ajax_action' );
 /*	Ajax callback for attaching in galery */
-add_action( 'wp_ajax_add_attachment_item_gallery', 'rttchr_attach_galery_ajax_action' ); 
+add_action( 'wp_ajax_add_attachment_item_gallery', 'rttchr_attach_galery_ajax_action' );
 /*	Add notises in media upoader for portfolio	*/
-add_action( 'wp_ajax_portfolio_notice', 'rttchr_attach_portfolio_ajax_action' ); 
+add_action( 'wp_ajax_portfolio_notice', 'rttchr_attach_portfolio_ajax_action' );
 /* Save change attach or anattach in galery */
 add_action( 'save_post', 'rttchr_save_change_gallery' );
 /*	Add/Remove Columns */
